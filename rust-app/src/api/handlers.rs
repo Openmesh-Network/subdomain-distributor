@@ -92,6 +92,10 @@ async fn reserve(path: web::Path<String>, reservation: web::Json<Reserve>) -> im
         )));
     }
 
+    log::info!(
+        "Subdomain {subdomain} got reserved by {user}",
+        user = reservation.user
+    );
     HttpResponse::Ok().finish()
 }
 
