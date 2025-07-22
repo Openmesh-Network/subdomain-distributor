@@ -146,6 +146,14 @@ in
           '';
         };
       };
+
+      openFirewall = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = ''
+          Whether to open ports in the firewall for this application.
+        '';
+      };
     };
   };
 
@@ -213,5 +221,10 @@ in
     systemd.services.coredns.serviceConfig.DynamicUser = lib.mkForce false;
     systemd.services.coredns.serviceConfig.User = "subdomain-distributor";
     systemd.services.coredns.serviceConfig.Group = "subdomain-distributor";
+
+    networking.firewall = lib.mkIf cfg.openFirewall {
+      allowedTCPPorts = [ cfg.port ];
+      allowedUDPPorts = [ 53 ];
+    };
   };
 }
