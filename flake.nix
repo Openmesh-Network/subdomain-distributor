@@ -1,5 +1,5 @@
 {
-  description = "Rust app running on Xnode!";
+  description = "Allow anyone to claim *.subdomain.tld records.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
