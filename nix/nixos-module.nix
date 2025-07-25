@@ -214,6 +214,7 @@ in
           ${cfg.domain} {
             auto {
               directory ${cfg.zonesDir}
+              reload 10s
             }
           }
         '';
