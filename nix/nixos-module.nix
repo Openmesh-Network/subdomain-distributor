@@ -188,6 +188,7 @@ in
         User = "subdomain-distributor";
         Group = "subdomain-distributor";
         StateDirectory = "subdomain-distributor";
+        Restart = "on-failure";
       };
     };
 
