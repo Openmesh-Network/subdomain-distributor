@@ -7,7 +7,7 @@ use crate::{
     api::models::Reserve,
     utils::{
         coredns::subdomain_file,
-        env::{domain, zonesdir},
+        env::{domain, subdomain_regex, zonesdir},
         error::ResponseError,
     },
 };
@@ -25,9 +25,9 @@ async fn reserve(path: web::Path<String>, reservation: web::Json<Reserve>) -> im
 
     let invalid = invalid_arg(
         [(
-            "Subomdain",
+            "Subdomain",
             subdomain.as_str(),
-            Regex::new(r"^[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])?$").expect("Invalid Subdomain Regex"),
+            Regex::new(&subdomain_regex()).expect("Invalid Subdomain Regex"),
         ), (
             "User",
             reservation.user.as_str(),

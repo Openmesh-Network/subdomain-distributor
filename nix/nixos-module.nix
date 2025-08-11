@@ -147,6 +147,15 @@ in
         };
       };
 
+      subdomain-regex = lib.mkOption {
+        type = lib.types.str;
+        default = "^[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])?$";
+        example = "^.*$";
+        description = ''
+          The regex for valid subdomains issued through this distributor.
+        '';
+      };
+
       openFirewall = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -182,6 +191,7 @@ in
         SOAMINIMUMTTL = cfg.soa.minimumTTL;
         DATADIR = cfg.dataDir;
         ZONESDIR = cfg.zonesDir;
+        SUBDOMAINREGEX = cfg.subdomain-regex;
       };
       serviceConfig = {
         ExecStart = "${lib.getExe subdomain-distributor}";

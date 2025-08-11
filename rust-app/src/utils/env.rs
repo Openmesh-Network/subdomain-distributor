@@ -61,3 +61,8 @@ pub fn zonesdir() -> PathBuf {
         .map(|d| Path::new(&d).to_path_buf())
         .unwrap_or(Path::new(&datadir()).join("zones"))
 }
+
+pub fn subdomain_regex() -> String {
+    env_var("SUBDOMAINREGEX")
+        .unwrap_or(r"^[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])?$".to_string())
+}
